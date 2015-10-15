@@ -1,0 +1,140 @@
+<#macro layout pageTitle="" pageCss="" pageJavascript="" menuDisplay="show" menuTag="menuIndex">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>${pageTitle}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<!-- Js BEGAIN -->
+<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/sweet-alert.min.js"></script>
+<script type="text/javascript" src="/js/underscore-min.js"></script>
+<script type="text/javascript" src="/js/jquery.page.js"></script>
+<script type="text/javascript" src="/js/validform/Validform_v5.3.2.js"></script>
+<script type="text/javascript" src="/js/validform/Validform_Datatype.js"></script>
+<script type="text/javascript" src="/js/sitecommon.js"></script>
+<!-- Js END -->
+<!-- Css BEGAIN -->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/sweet-alert.css" />
+<link rel="stylesheet" href="/css/base.css?v=0.1" />
+<!-- page specific plugin BEGAIN -->
+${pageCss}
+<!-- page specific plugin END -->
+<!-- Css END -->
+<!--[if lt IE 9]><script src="/js/h5support/ie8-responsive-file-warning.js"></script><![endif]-->
+<script src="/js/h5support/ie-emulation-modes-warning.js"></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="/js/h5support/html5shiv.min.js"></script>
+<script src="/js/h5support/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<!-- PAGE CONTENT BEGINS -->
+<#if menuDisplay == "show">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Project name</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+      <form class="navbar-form navbar-right">
+        <input type="text" class="form-control" placeholder="Search...">
+      </form>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar hidden-xs">
+		<ul class="sider-nav nav nav-tabs nav-stacked">
+			<li id="menuIndex"><a href="#"><i class="glyphicon glyphicon-th-large"></i>首页</a></li>
+			<#if (session.usermodels?index_of(",1,")&gt;-1||session.usermodels?index_of(",2,")&gt;-1)>
+			<li>
+				<a href="#menuSystemSetting" class="nav-header collapsed" data-toggle="collapse">
+					<i class="glyphicon glyphicon-cog"></i>系统管理 <span class="pull-right glyphicon glyphicon-chevron-toggle"></span>
+				</a>
+				<ul id="menuSystemSetting" class="nav nav-list secondmenu collapse">
+					<#if session.usermodels?index_of(",1,")&gt;-1 > 
+					<li id="menuRole"><a href="/admin/role"><i class="glyphicon glyphicon-asterisk"></i>角色管理</a></li>
+					</#if>
+					<#if session.usermodels?index_of(",2,")&gt;-1 > 
+					<li id="menuUser"><a href="/admin/bguser"><i class="glyphicon glyphicon-user"></i>用户管理</a></li>
+					</#if>
+				</ul>
+			</li>
+			</#if>
+			<li>
+				<a href="#menuConfigSetting" class="nav-header collapsed" data-toggle="collapse"> 
+					<i class="glyphicon glyphicon-credit-card"></i>配置管理 <span class="pull-right glyphicon  glyphicon-chevron-toggle"></span>
+				</a>
+				<ul id="menuConfigSetting" class="nav nav-list secondmenu collapse">
+					<li><a href="#"><i class="glyphicon glyphicon-globe"></i>全局缺省配置</a></li>
+					<li><a href="#"><i class="glyphicon glyphicon-star-empty"></i>未开通用户配置</a></li>
+					<li><a href="#"><i class="glyphicon glyphicon-star"></i>退订用户配置</a></li>
+					<li><a href="#"><i class="glyphicon glyphicon-text-width"></i>试用用户配置</a></li>
+					<li><a href="#"><i class="glyphicon glyphicon-ok-circle"></i>开通用户配置</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">
+					<i class="glyphicon glyphicon-fire"></i>关于系统 <span class="badge pull-right">1</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+		<ol id="breadcrumbs" class="breadcrumb top">
+		</ol>		
+		<script type="text/javascript">
+		$(function(){
+			var menuTag = "${menuTag!}";
+			if(menuTag!=""){
+				if(menuTag.indexOf("-")!=-1){
+					var menuArr = menuTag.split("-");
+					$("#breadcrumbs").append("<li>"+$("#"+menuArr[0]).prev().text()+"</li>");
+					$("#breadcrumbs").append("<li>"+$("#"+menuArr[1]).children().text()+"</li>");
+					$("#"+menuArr[0]).addClass("in");
+					$("#"+menuArr[1]).addClass("active");
+				}
+				else{
+					$("#breadcrumbs").append("<li>"+$("#"+menuTag).children().text()+"</li>");
+					$("#"+menuTag).addClass("active");
+				}
+			}
+		});
+		</script>
+		<div class="main">
+			<#nested>
+		</div>
+    </div>
+  </div>
+</div>
+<#else>
+<#nested>
+</#if>
+<!-- PAGE CONTENT ENDS -->
+<!-- JavaScript BEGAIN -->
+${pageJavascript}
+<!-- JavaScript END -->
+<#include "/common/_statistics.html">
+</body>
+</html>
+</#macro>	

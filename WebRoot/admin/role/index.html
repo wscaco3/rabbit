@@ -1,0 +1,65 @@
+<#include "/common/_layout.html">
+<#assign pageJavascript>
+<script type="text/javascript">
+var delit = function(obj){
+	var tr = $(obj).parent().parent("tr").attr("id");
+	var id = tr.replace("tr_","");
+	listPage.deleteTr(tr,id);
+};
+$(function(){
+	listPage.config = {listUrl:"/admin/role/profile",delUrl:"/admin/role/delete"};
+	listPage.showlist = function(data){
+		if(data.list == undefined) return false;
+		$("#showlist").empty();
+		$.each(data.list, function (i, row) {
+			var str = '<tr id="tr_'+row.id+'"><td>'+row.rname+'</td><td>'+row.remark+'</td><td>'
+			<#if session.usermodels?index_of(",1_2,")&gt;-1 > 
+			+'<a class="btn btn-primary btn-xs" href="/admin/role/edit/'+row.id+'">修改</a>'
+			</#if>
+			<#if session.usermodels?index_of(",1_3,")&gt;-1 > 
+			+'&nbsp;<button class="btn btn-danger btn-xs" onclick="delit(this)">删除</button>'
+			</#if>
+			+'</td></tr>';
+			$("#showlist").append(str);
+		});
+		$("#page").page({total:data.totalRow,currentpage:data.pageNumber,gopage:listPage.gopage,pagesize:data.pageSize});
+	};
+	$("#querybtn").click(function(){
+		listPage.gopage(10,1);
+	});
+	$("#querybtn").click();	
+});
+</script>
+</#assign>
+<#assign pageCss>
+<style type="text/css">
+</style>
+</#assign>
+<@layout pageTitle="角色管理" pageJavascript=pageJavascript pageCss=pageCss menuTag="menuSystemSetting-menuRole">		
+<div class="alert alert-info">
+	请在角色管理设置后台用户可操作的模块。
+</div>
+<div class="well filter">
+	<div class="form-inline">
+		<div class="form-group">
+			<label for="rname">角色名</label> 
+			<input type="text" class="form-control" id="rname" data-rule="like">
+		</div>
+		<button id="querybtn" class="btn btn-default">查询</button>
+		<#if session.usermodels?index_of(",1_1,")&gt;-1 > 
+		<a href="/admin/role/add" class="btn btn-success">新增</a>
+		</#if>
+	</div>
+</div>
+<table class="table table-bordered table-hover table-striped">
+	<thead>
+		<tr>
+			<th width="60px" >商品名称</th>
+			<th width="60px" class="hidden-xs">备注</th>
+			<th width="60px">操作</th>
+		</tr>
+	</thead>
+	<tbody id="showlist"></tbody>
+</table>
+<nav><ul id="page" class="pagination"></ul></nav>
+</@layout>

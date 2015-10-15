@@ -1,0 +1,168 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+}
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+}
+/*
+ * Sidebar
+ */
+/* Hide for mobile, show later */
+.sidebar {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: block;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  background-color: #f5f5f5;
+  border-right: 1px solid #eee;
+}
+/* Sidebar navigation */
+.sider-nav i.glyphicon{
+	margin-right: 5px;
+}
+.sider-nav.nav-tabs.nav-stacked>li {	
+}
+.sider-nav.nav-tabs.nav-stacked>li>a {
+	padding: 10px 8px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #4A515B;
+	background: #E9E9E9;
+	background: -moz-linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FAFAFA),color-stop(100%, #E9E9E9));
+	background: -webkit-linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%);
+	background: -o-linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%);
+	background: -ms-linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%);
+	background: linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA',endColorstr='#E9E9E9');
+	-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9')";
+	border: 1px solid #D5D5D5;
+	border-radius: 4px;
+}
+
+.sider-nav.nav-tabs.nav-stacked>li>a>span {
+	color: #4A515B;
+}
+
+.sider-nav.nav-tabs.nav-stacked>li.active>a, .sider-nav.nav-tabs.nav-stacked>li>a:hover{
+	color: #FFF;
+	background: #3C4049;
+	background: -moz-linear-gradient(top, #4A515B 0%, #3C4049 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4A515B),color-stop(100%, #3C4049));
+	background: -webkit-linear-gradient(top, #4A515B 0%, #3C4049 100%);
+	background: -o-linear-gradient(top, #4A515B 0%, #3C4049 100%);
+	background: -ms-linear-gradient(top, #4A515B 0%, #3C4049 100%);
+	background: linear-gradient(top, #4A515B 0%, #3C4049 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4A515B',endColorstr='#3C4049');
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#4A515B', endColorstr='#3C4049')";
+	border-color: #2B2E33;
+}
+
+.sider-nav.nav-tabs.nav-stacked > li.active > a, .sider-nav.nav-tabs.nav-stacked > li > a:hover > span {
+    color: #FFF;
+}
+
+.sider-nav.nav-tabs.nav-stacked>li {
+	margin-bottom: 4px;
+}
+.sider-nav .secondmenu li{
+	margin-bottom:2px;
+}
+
+.sider-nav .secondmenu a {
+	font-size: 12px;
+	color: #4A515B;
+	text-align: center;
+	border-radius: 4px;
+}
+
+.sider-nav .secondmenu>li>a:hover {
+	background-color: #6f7782;
+	border-color: #428bca;
+	color: #fff;
+}
+
+.sider-nav .secondmenu li.active {
+	background-color: #6f7782;
+	border-color: #428bca;
+	border-radius: 4px;
+}
+
+.sider-nav .secondmenu li.active>a {
+	color: #ffffff;
+}
+.sider-nav .nav-header.collapsed>span.glyphicon-chevron-toggle:before {
+	content: "\e114";
+}
+
+.sider-nav .nav-header>span.glyphicon-chevron-toggle:before {
+	content: "\e113";
+}
+
+/*Main content */
+.breadcrumb.top{
+	margin:10px 0;
+}
+.main .page-header {
+  margin-top: 0;
+}
+.main .sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+/*分页补充样式*/
+.finalsizeselect{
+	display:inline-block;
+}
+.finaljumppagenum{
+	height:18px;
+	margin:0;
+	padding:0;
+	border:0;
+	text-align:center;
+	border-bottom:1px solid #ddd;
+}
+/*==========以下部分是Validform必须的===========*/
+.Validform_checktip{
+	margin-left:8px;
+	line-height:20px;
+	height:20px;
+	overflow:hidden;
+	color:#999;
+	font-size:12px;
+}
+.Validform_right{
+	color:#71b83d;
+	padding-left:20px;
+	background:url(img/validright.png) no-repeat left center;
+}
+.Validform_wrong{
+	color:red;
+	padding-left:20px;
+	white-space:nowrap;
+	background:url(img/validerror.png) no-repeat left center;
+}
+.Validform_loading{
+	padding-left:20px;
+	background:url(img/validonLoad.gif) no-repeat left center;
+}
+.Validform_error{
+	border:1px solid red;
+}
+#Validform_msg{color:#7d8289; font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif; width:280px; -webkit-box-shadow:2px 2px 3px #aaa; -moz-box-shadow:2px 2px 3px #aaa; background:#fff; position:absolute; top:0px; right:50px; z-index:99999; display:none;filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#999999'); box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);}
+#Validform_msg .iframe{position:absolute; left:0px; top:-1px; z-index:-1;}
+#Validform_msg .Validform_title{line-height:25px; height:25px; text-align:left; font-weight:bold; padding:0 8px; color:#fff; position:relative; background-color:#999;
+background: -moz-linear-gradient(top, #999, #666 100%); background: -webkit-gradient(linear, 0 0, 0 100%, from(#999), to(#666)); filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#999999', endColorstr='#666666');}
+#Validform_msg a.Validform_close:link,#Validform_msg a.Validform_close:visited{line-height:22px; position:absolute; right:8px; top:0px; color:#fff; text-decoration:none;}
+#Validform_msg a.Validform_close:hover{color:#ccc;}
+#Validform_msg .Validform_info{padding:8px;border:1px solid #bbb; border-top:none; text-align:left;}

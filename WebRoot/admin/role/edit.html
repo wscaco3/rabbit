@@ -1,0 +1,75 @@
+<#include "/common/_layout.html">
+<#assign pageCss>
+<link rel="stylesheet" href="/css/ztree.css" />
+</#assign>
+<#assign pageJavascript>
+<script src="/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var zNodes = ${modeljson!};
+	$.fn.zTree.init($("#tree1"), {
+		check: {enable: true,chkboxType:{ "Y" : "ps", "N" : "s" }},
+		data: {simpleData: {enable: true}}
+	}, zNodes);
+	$("#form1").Validform({
+		tiptype:5,
+		beforeSubmit:function(curform){
+			var treeObj = $.fn.zTree.getZTreeObj("tree1");
+			var nodes = treeObj.getCheckedNodes(true);
+			var models = "";
+			if(nodes.length>0){
+				models = ",";
+				for(var i = 0;i<nodes.length;i++){
+					models += nodes[i].id+",";
+				}
+			}
+			var para = $(curform).serializeObject();
+			$.extend(para,{"role.models":models,"role.id":"${(role.id)!}"});
+			$.post("/admin/role/save?v="+Math.random(),para,function(data){
+	           if (data.msg == 'success') {
+	        		swal({title : "保存成功！",	text : "保存成功！",type : "success"},
+					function(){window.location="/admin/role";});
+	           }
+		       else {swal("保存失败！", data.msg,"warning");}
+			});
+			return false;	
+		}
+	});
+});
+</script>
+</#assign>
+<@layout pageTitle="角色管理" pageJavascript=pageJavascript pageCss=pageCss menuTag="menuSystemSetting-menuRole">		
+<!-- pageHeader BEGAIN -->
+<div class="page-header">
+	角色编辑
+</div>
+<!-- pageHeader END -->
+<!-- pageContent BEGAIN -->
+<form id = "form1" class="form-horizontal">
+  <div class="form-group">
+    <label for="role.rname" class="col-sm-2 control-label">权限名</label>
+    <div class="col-xs-10 col-sm-5">
+      <input type="text" id="role.rname" name="role.rname" value="${(role.rname)!}" datatype="s1-50" class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="role.remark" class="col-sm-2 control-label">备注</label>
+    <div class="col-xs-10 col-sm-5">
+      <textarea id="role.remark" name="role.remark" datatype="*0-200"  class="form-control" >${(role.remark)!}</textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="role.remark" class="col-sm-2 control-label">模块选择</label>
+    <div class="col-xs-10 col-sm-5">
+      <ul id="tree1" class="ztree"></ul>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-success">提交</button>
+      <a href="/admin/role" class="btn btn-default">取消</a>
+    </div>
+  </div>
+</form>
+<!-- pageContent END -->
+</@layout>
