@@ -9,5 +9,12 @@ public class AdminCtrl extends AdminRootCtrl{
 		System.out.println(AuthorAnnoInterceptor.getAuthModelNames().toString());
 		render("center.html");
 	}
+
+	public void ueditor(){
+		
+	}
+	public void crop(){
+		
+	}
 	
 }

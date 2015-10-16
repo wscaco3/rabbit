@@ -1,0 +1,27 @@
+<#include "/common/_layout.html">
+<#assign pageJavascript>
+<script src="/js/croppic/croppic.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+var croppicContaineroutputMinimal = {
+		uploadUrl:'/admin/uploadfile/croppicsave',
+		cropUrl:'/admin/uploadfile/croppiccrop', 
+		modal:false,
+	    rotateControls: false
+}
+var cropContaineroutput = new Croppic('cropContainerMinimal', croppicContaineroutputMinimal);
+</script>
+</#assign>
+<#assign pageCss>
+<link rel="stylesheet" href="/css/croppic.css" />
+<style type="text/css">
+#cropContainerMinimal {
+	width: 200px;
+	height: 150px;
+	border:1px solid red;
+	position:relative; /* or fixed or absolute */
+}
+</style>
+</#assign>
+<@layout pageTitle="首页" pageJavascript=pageJavascript pageCss=pageCss menuTag="menuIndex">		
+<div id="cropContainerMinimal"></div>
+</@layout>
