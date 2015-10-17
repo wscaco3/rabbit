@@ -13,12 +13,12 @@ import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.filter.ssl.SslFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
-import com.rabbit.im.client.handler.BindHandler;
-import com.rabbit.im.client.handler.LogoutHandler;
-import com.rabbit.im.client.handler.PushOfflineMessageHandler;
-import com.rabbit.im.client.handler.SessionClosedHandler;
+import com.rabbit.im.chat.handler.BindHandler;
+import com.rabbit.im.chat.handler.LogoutHandler;
+import com.rabbit.im.chat.handler.PushOfflineMessageHandler;
+import com.rabbit.im.chat.handler.SessionClosedHandler;
 import com.rabbit.im.nio.filter.ServerMessageCodecFactory;
-import com.rabbit.im.nio.handler.CIMRequestHandler;
+import com.rabbit.im.nio.handler.IMRequestHandler;
 import com.rabbit.im.nio.handler.HeartbeatHandler;
 import com.jfinal.plugin.IPlugin;
 import com.rabbit.im.nio.handler.MainIOHandler;
@@ -46,7 +46,7 @@ public class MinaPlugin implements IPlugin {
 		acceptor.getSessionConfig().setTcpNoDelay(true);
     	//handler
     	MainIOHandler mainIOHandler = new MainIOHandler();
-    	HashMap<String, CIMRequestHandler> handlers = new HashMap<String, CIMRequestHandler>();
+    	HashMap<String, IMRequestHandler> handlers = new HashMap<String, IMRequestHandler>();
     	handlers.put("client_bind", new BindHandler());
     	handlers.put("client_logout", new LogoutHandler());
     	handlers.put("client_heartbeat", new HeartbeatHandler());

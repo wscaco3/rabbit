@@ -3,26 +3,26 @@ package com.rabbit.im.nio.handler;
 
 import org.apache.log4j.Logger;
 
-import com.rabbit.im.nio.constant.CIMConstant;
+import com.rabbit.im.nio.constant.IMConstant;
 import com.rabbit.im.nio.mutual.ReplyBody;
 import com.rabbit.im.nio.mutual.SentBody;
-import com.rabbit.im.nio.session.CIMSession;
+import com.rabbit.im.nio.session.IMSession;
 
 /**
  *客户端心跳实现
  * 
  * @author
  */
-public class HeartbeatHandler implements CIMRequestHandler {
+public class HeartbeatHandler implements IMRequestHandler {
 
 	protected final Logger logger = Logger.getLogger(HeartbeatHandler.class);
 
-	public ReplyBody process(CIMSession session, SentBody message) {
+	public ReplyBody process(IMSession session, SentBody message) {
 
 		logger.warn("heartbeat... from "+session.getRemoteAddress().toString());
 		ReplyBody reply = new ReplyBody();
-		reply.setKey(CIMConstant.RequestKey.CLIENT_HEARTBEAT);
-		reply.setCode(CIMConstant.ReturnCode.CODE_200);
+		reply.setKey(IMConstant.RequestKey.CLIENT_HEARTBEAT);
+		reply.setCode(IMConstant.ReturnCode.CODE_200);
 		session.setHeartbeat(System.currentTimeMillis());
 		return reply;
 	}

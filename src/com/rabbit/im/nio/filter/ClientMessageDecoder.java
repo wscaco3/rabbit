@@ -12,7 +12,7 @@ import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import com.rabbit.im.nio.constant.CIMConstant;
+import com.rabbit.im.nio.constant.IMConstant;
 import com.rabbit.im.nio.mutual.Message;
 import com.rabbit.im.nio.mutual.ReplyBody;
 /**
@@ -35,7 +35,7 @@ public class ClientMessageDecoder extends CumulativeProtocolDecoder {
 			 * CIMConstant.MESSAGE_SEPARATE 为消息界限
 			 * 当一次收到多个消息时，以此分隔解析多个消息
 			 */
-			if (b == CIMConstant.MESSAGE_SEPARATE) {
+			if (b == IMConstant.MESSAGE_SEPARATE) {
 
 				complete = true;
 				break;
