@@ -16,7 +16,8 @@ import com.jfinal.upload.RenamePolicyCos;
 import com.rabbit.controller.IndexCtrl;
 import com.rabbit.controller.common.UploadFileCtrl;
 import com.rabbit.model.*;
-import com.rabbit.plugin.quartz.QuartzPlugin;
+import com.rabbit.plugin.MinaPlugin;
+import com.rabbit.plugin.QuartzPlugin;
 
 /**
  * API引导式配置
@@ -57,6 +58,8 @@ public class Config extends JFinalConfig {
 		me.add(quartzPlugin);
 		//encache缓存插件
 		me.add(new EhCachePlugin()); 
+		//mina插件
+		me.add(new MinaPlugin());
 		// 用于缓存bbs模块的redis服务 
 		RedisPlugin localRedis = new RedisPlugin("bbs", "localhost",6379); 
 		me.add(localRedis); 

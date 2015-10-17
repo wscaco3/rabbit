@@ -1,4 +1,4 @@
-package com.rabbit.plugin.quartz;
+package com.rabbit.plugin;
  
 import java.io.IOException;
 import java.io.InputStream;
