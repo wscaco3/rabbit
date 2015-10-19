@@ -18,19 +18,12 @@ public class DefaultMessagePusher implements  IMMessagePusher {
 
 	private final Log log = LogFactory.getLog(getClass());
 
-	private DefaultSessionManager sessionManager;
-	
- 
-    public void setSessionManager(DefaultSessionManager sessionManager) {
-		this.sessionManager = sessionManager;
-	}
-
 	/**
      * 向用户发送消息
      * @param msg
      */
 	public void pushMessageToUser(Message msg) {
-		IMSession session = sessionManager.getSession(msg.getReceiver());
+		IMSession session = DefaultSessionManager.getInstance().getSession(msg.getReceiver());
 		
 		/*服务器集群时，可以在此 判断当前session是否连接于本台服务器，如果是，继续往下走，如果不是，将此消息发往当前session连接的服务器并 return
 		if(!session.isLocalhost()){//判断当前session是否连接于本台服务器，如不是

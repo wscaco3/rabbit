@@ -11,10 +11,10 @@ public class AdminCtrl extends AdminRootCtrl{
 	}
 
 	public void ueditor(){
-		
+		render("demo/ueditor.html");
 	}
 	public void crop(){
-		
+		render("demo/crop.html");
 	}
 	
 }

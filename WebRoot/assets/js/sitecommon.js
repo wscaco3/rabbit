@@ -141,33 +141,31 @@ var listPage = {
 		delUrl:""
 	},
 	deleteTr:function(trid,rowid){
-		swal({
-				title : "确认要删除此项？",
-				text : "删除后不可恢复!",
-				type : "warning",
-				showCancelButton : true,
-				confirmButtonText : "确认",
-				cancelButtonText : "取消"
-			},
-			function(){
-				$.post(pageUtil.config.delUrl,{id:rowid},function(data){
-					if(data.msg="success"){
-						swal("已删除!", "你选则的项已经删除！","success");
-						$("#"+trid).remove();
-					}
-					else{
-						swal("删除失败!", data.msg,"warning");
-					}
-				});			
-			}
-		);
+		layer.confirm('确认要删除此项？', {icon: 3}, function(index){
+		    layer.close(index);
+			var loadIndex = layer.load();
+		    $.post(listPage.config.delUrl,{id:rowid},function(data){
+				if(data.msg="success"){
+					layer.msg('删除成功!');
+					$("#"+trid).remove();
+				}
+				else{
+					layer.msg('删除失败!', {icon: 5});
+				}
+				layer.close(loadIndex);
+			});	
+		});
 	},
 	gopage:function(rp,page){
+		var loadIndex = layer.load();
 		$.exAjax({
 			url : listPage.config.listUrl,
 			data : {param:$(".filter").getFilters(),page:page,rp:rp},
 			success : listPage.showlist,
-			error : function() {swal('获取数据出错');}
+			error : function() {
+				layer.msg('获取数据出错!', {icon: 5});
+			},
+			complete:function(){layer.close(loadIndex);}
 		});
 	},
 	showlist:function(data){}

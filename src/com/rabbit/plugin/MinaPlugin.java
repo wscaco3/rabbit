@@ -28,7 +28,7 @@ public class MinaPlugin implements IPlugin {
  
     private final Logger log = Logger.getLogger(getClass());
     /** Choose your favorite port number. */
-    private static final int PORT = 1234;
+    private static final int PORT = 23456;
     /** Set this to true if you want to make the server SSL */
     private static final boolean USE_SSL = false;
     

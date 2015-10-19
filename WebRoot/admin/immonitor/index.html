@@ -1,0 +1,83 @@
+<#include "/common/_layout.html">
+<#assign pageJavascript>
+<script type="text/javascript">
+var sendMsg = function(){
+	$("#msgModal").modal("hide");
+	var message = $("#modalText").val();
+	$("#modalText").val("");
+	var loadIndex = layer.load();
+	$.post("/admin/immonitor/msg", {
+			content : message,
+			type : 2,
+			sender : 'system',
+			receiver : $("#modalLabel").attr("data-id")
+		}, function(data) {
+			layer.msg('发送成功');
+			layer.close(loadIndex);
+		}
+	);
+};
+var showMsgModal = function(obj) {
+	var account = $(obj).parent().parent().attr("id");
+	$("#modalLabel").attr("data-id",account);
+	$("#modalLabel").html("接收用户：" + account);
+	$("#msgModal").modal("show");
+};
+</script>
+</#assign>
+<#assign pageCss>
+<style type="text/css">
+</style>
+</#assign>
+<@layout pageTitle="角色管理" pageJavascript=pageJavascript pageCss=pageCss menuTag="menuSystemSetting-menuRole">	
+<div id="msgModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modalLabel" data-id="">接收用户：</h4>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="message-text" class="control-label">发送内容:</label>
+            <textarea class="form-control" id="modalText"></textarea>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" onclick="sendMsg();">发送</button>
+      </div>
+    </div>
+  </div>
+</div>
+<table class="table table-bordered table-hover table-striped">
+	<thead>
+		<tr>
+            <th width="4%">头像</th>
+			<th width="15%">账号</th>
+			<th width="10%">终端</th>
+			<th width="10%">设备型号</th>
+			<th width="10%">在线时长</th>
+			<th width="28%">位置</th>
+			<th width="12%">操作</th>
+		</tr>
+	</thead>
+	<tbody id="showlist">
+		<#if csc??>
+		<#list csc as data>
+		<tr id="${(data.account)!}">
+			<td>&nbsp;</td>
+			<td>${(data.account)!}</td>
+			<td>${(data.channel)!}</td>
+			<td>${(data.deviceModel)!}</td>
+			<td>${(data.bindTime)!}秒</td>
+			<td>${(data.location)!}</td>
+			<td>
+				<button type="button" class="btn btn-info btn-xs" onclick="showMsgModal(this)">发送消息</button>
+			</td>
+		</tr>
+		</#list>
+		</#if>
+	</tbody>
+</table>
+</@layout>

@@ -9,6 +9,8 @@ public class AdminRoutes extends Routes {
 		add("/admin", AdminCtrl.class);
 		add("/admin/role", RoleCtrl.class);
 		add("/admin/bguser", BguserCtrl.class);
+		add("/admin/webchat", WebChatCtrl.class);
+		add("/admin/immonitor", ImMonitorCtrl.class);
 	}
 
 }

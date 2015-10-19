@@ -54,7 +54,7 @@ public class ServerMessageDecoder extends CumulativeProtocolDecoder {
 	        byte[] bytes = new byte[buff.limit()];
 	        buff.get(bytes);
 	        
-	        String message = new String(bytes, "UTF-8");
+	        String message = new String(bytes, charset);
 	        logger.warn("ServerMessageDecoder:" + message);
 	        buff.clear();
 	        try{

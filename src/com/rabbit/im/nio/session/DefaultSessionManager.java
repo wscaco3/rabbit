@@ -65,7 +65,7 @@ public class DefaultSessionManager implements SessionManager {
 
 	}
 
-	public boolean containsCIMSession(IMSession ios) {
+	public boolean containsIMSession(IMSession ios) {
 		return sessions.containsKey(ios.getAttribute(IMConstant.SESSION_KEY))
 				|| sessions.containsValue(ios);
 	}

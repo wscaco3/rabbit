@@ -25,12 +25,16 @@ $(function(){
 			}
 			var para = $(curform).serializeObject();
 			$.extend(para,{"role.models":models,"role.id":"${(role.id)!}"});
+			var loadIndex = layer.load();
 			$.post("/admin/role/save?v="+Math.random(),para,function(data){
 	           if (data.msg == 'success') {
-	        		swal({title : "保存成功！",	text : "保存成功！",type : "success"},
-					function(){window.location="/admin/role";});
+	        	   layer.alert('保存成功！',{icon: 6},function(index){
+	        		   layer.close(index);
+	        		   window.location="/admin/role";
+	        	   });
 	           }
-		       else {swal("保存失败！", data.msg,"warning");}
+		       else {layer.msg('保存失败！', {icon: 5});}
+	           layer.close(loadIndex);
 			});
 			return false;	
 		}
