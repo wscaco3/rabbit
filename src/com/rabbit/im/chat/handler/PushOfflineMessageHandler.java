@@ -30,12 +30,11 @@ public class PushOfflineMessageHandler implements IMRequestHandler {
 		ReplyBody reply = new ReplyBody();
 		reply.setCode(IMConstant.ReturnCode.CODE_200);
 		try {
-			String account = message.get("account");
+			//String account = message.get("account");
 			//获取到存储的离线消息
 			//List<Message> list = messageService.queryOffLineMessages(account);
 			List<Message> list = new ArrayList<Message>();
-			for (Message m : list) {
-				
+			for (Message m : list) {				
 				ios.write(m);
 			}
  

@@ -19,7 +19,7 @@ public class HeartbeatHandler implements IMRequestHandler {
 
 	public ReplyBody process(IMSession session, SentBody message) {
 
-		logger.warn("heartbeat... from "+session.getRemoteAddress().toString());
+		logger.debug("heartbeat... from "+session.getRemoteAddress().toString());
 		ReplyBody reply = new ReplyBody();
 		reply.setKey(IMConstant.RequestKey.CLIENT_HEARTBEAT);
 		reply.setCode(IMConstant.ReturnCode.CODE_200);

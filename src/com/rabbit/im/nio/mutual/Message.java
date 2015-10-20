@@ -61,8 +61,7 @@ public class Message implements Serializable {
 	private long timestamp;
 	
 	
-	public Message()
-	{
+	public Message(){
 		timestamp = System.currentTimeMillis();
 	}
 	public long getTimestamp() {
@@ -137,9 +136,7 @@ public class Message implements Serializable {
 		this.format = format;
 	}
 	
-	public String toString()
-	{
-		
+	public String toString(){		
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		buffer.append("<message>");
@@ -156,9 +153,8 @@ public class Message implements Serializable {
 		buffer.append("</message>");
 		return buffer.toString();
 	}
-	public String toXmlString()
-	{
-		
+	
+	public String toXmlString(){		
 		return toString();
 	}
 

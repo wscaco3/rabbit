@@ -44,38 +44,28 @@ public class BindHandler implements IMRequestHandler {
 			 */
 			IMSession oldSession  = sessionManager.getSession(account);
             //如果是账号已经在另一台终端登录。则让另一个终端下线
-			if(oldSession!=null&&!oldSession.equals(newSession))
-			{
-					 
+			if(oldSession!=null&&!oldSession.equals(newSession)){					 
 					oldSession.removeAttribute(IMConstant.SESSION_KEY);
 					Message msg = new Message();
 					msg.setType(IMConstant.MessageType.TYPE_999);//强行下线消息类型
 					msg.setReceiver(account);
 					
-					if(!oldSession.isLocalhost())
-					{
-						
+					if(!oldSession.isLocalhost()){						
 						/*
 						判断当前session是否连接于本台服务器，如不是发往目标服务器处理
 						MessageDispatcher.execute(msg, oldSession.getHost());
 						*/
-					}else
-					{
+					}else{
 						oldSession.write(msg);
 						oldSession.close(true);
 						oldSession = null;
 					}
-					oldSession = null;
-				
+					oldSession = null;				
 			}
-			if(oldSession==null)
-			{
-				sessionManager.addSession(account, newSession);
-				 
-			}
-			
+			if(oldSession==null){
+				sessionManager.addSession(account, newSession);				 
+			}			
 			reply.setCode(IMConstant.ReturnCode.CODE_200);
-
 		} catch (Exception e) {
 			reply.setCode(IMConstant.ReturnCode.CODE_500);
 			e.printStackTrace();

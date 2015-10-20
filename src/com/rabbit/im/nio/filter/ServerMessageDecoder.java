@@ -33,15 +33,13 @@ public class ServerMessageDecoder extends CumulativeProtocolDecoder {
 		while (iobuffer.hasRemaining()) {
             byte b = iobuffer.get();
             /**
-			 * CIMConstant.MESSAGE_SEPARATE 为消息界限
+			 * IMConstant.MESSAGE_SEPARATE 为消息界限
 			 * 当一次收到多个消息时，以此分隔解析多个消息
 			 */
-            if (b == IMConstant.MESSAGE_SEPARATE ) {
-            	
+            if (b == IMConstant.MESSAGE_SEPARATE ) {            	
             	complete = true;
                 break;
-            }else if(b == '\0')//flex客户端 安全策略验证时会收到<policy-file- request/>\0的消息，忽略此消息内容
-            {
+            }else if(b == '\0'){	//flex客户端 安全策略验证时会收到<policy-file- request/>\0的消息，忽略此消息内容
             	complete = true;
                 break;
             }
@@ -55,20 +53,17 @@ public class ServerMessageDecoder extends CumulativeProtocolDecoder {
 	        buff.get(bytes);
 	        
 	        String message = new String(bytes, charset);
-	        logger.warn("ServerMessageDecoder:" + message);
+	        logger.debug("ServerMessageDecoder:" + message);
 	        buff.clear();
-	        try{
-	        	 
+	        try{	        	 
 				SentBody body = new SentBody();
 		    	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();   
 		        DocumentBuilder builder = factory.newDocumentBuilder();  
 		        Document doc = builder.parse(new ByteArrayInputStream(bytes));
 		        body.setKey(doc.getElementsByTagName("key").item(0).getTextContent());
-		        
 				
 				NodeList dataNodeList = doc.getElementsByTagName("data");
-				if(dataNodeList!=null && dataNodeList.getLength()>0)
-				{
+				if(dataNodeList!=null && dataNodeList.getLength()>0){
 					NodeList items = dataNodeList.item(0).getChildNodes();  
 					for (int i = 0; i < items.getLength(); i++) {  
 						Node node = items.item(i);  

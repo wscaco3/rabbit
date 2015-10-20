@@ -21,7 +21,6 @@ public class SentBody implements Serializable {
 	private long timestamp;
 
 	public SentBody() {
-
 		data = new HashMap<String, String>();
 		timestamp = System.currentTimeMillis();
 	}

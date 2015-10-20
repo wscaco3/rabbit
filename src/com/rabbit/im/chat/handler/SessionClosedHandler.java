@@ -23,11 +23,9 @@ public class SessionClosedHandler implements IMRequestHandler {
 
 		DefaultSessionManager sessionManager  = DefaultSessionManager.getInstance();
 
-		if(ios.getAttribute(IMConstant.SESSION_KEY)==null)
-		{
+		if(ios.getAttribute(IMConstant.SESSION_KEY)==null)		{
 			return null;
-		}
-		
+		}		
 	    String account = ios.getAttribute(IMConstant.SESSION_KEY).toString();
 	    sessionManager.removeSession(account);
 	    

@@ -27,7 +27,7 @@ public class MainIOHandler extends IoHandlerAdapter {
 
 	 
 	public void sessionCreated(IoSession session) throws Exception {
-		logger.warn("sessionCreated()... from "+session.getRemoteAddress().toString());
+		logger.debug("sessionCreated()... from "+session.getRemoteAddress().toString());
 	}
 
 	 
@@ -43,13 +43,12 @@ public class MainIOHandler extends IoHandlerAdapter {
 		/**
 		 * flex 客户端安全策略请求，需要返回特定报文
 		 */
-		if(IMConstant.FLEX_POLICY_REQUEST.equals(message))
-		{
+		if(IMConstant.FLEX_POLICY_REQUEST.equals(message)){
 			ios.write(IMConstant.FLEX_POLICY_RESPONSE);
 			return ;
 		}
 		
-		IMSession cimSession =new  IMSession(ios);
+		IMSession cimSession = new IMSession(ios);
 		ReplyBody reply = new ReplyBody();
 		SentBody body = (SentBody) message;
 		String key = body.getKey();
@@ -62,14 +61,11 @@ public class MainIOHandler extends IoHandlerAdapter {
 			reply = handler.process(cimSession, body);
 		}
 		
-        if(reply!=null)
-        {
+        if(reply!=null){
         	reply.setKey(key);
         	cimSession.write(reply);
     		logger.debug("-----------------------process done. reply: " + reply.toString());
         }
-        
-        
         //设置心跳时间 
         cimSession.setAttribute(IMConstant.HEARTBEAT_KEY, System.currentTimeMillis());
 	}
@@ -80,15 +76,13 @@ public class MainIOHandler extends IoHandlerAdapter {
 		
 		IMSession cimSession =new  IMSession(ios);
 		try{
-			logger.warn("sessionClosed()... from "+cimSession.getRemoteAddress());
+			logger.debug("sessionClosed()... from "+cimSession.getRemoteAddress());
 			IMRequestHandler handler = handlers.get("sessionClosedHander");
-			if(handler!=null && cimSession.containsAttribute(IMConstant.SESSION_KEY))
-			{
+			if(handler!=null && cimSession.containsAttribute(IMConstant.SESSION_KEY)){
 				handler.process(cimSession, null);
 			}
 		}
-		catch(Exception e)
-		{
+		catch(Exception e){
 			e.printStackTrace();
 		}
 	}
@@ -98,15 +92,12 @@ public class MainIOHandler extends IoHandlerAdapter {
 	public void sessionIdle(IoSession session, IdleStatus status)
 			throws Exception {
 		logger.warn("sessionIdle()... from "+session.getRemoteAddress().toString());
-		if(!session.containsAttribute(IMConstant.SESSION_KEY))
-		{
+		if(!session.containsAttribute(IMConstant.SESSION_KEY)){
 			session.close(true);
-		}else
-		{
+		}else{
 			//如果5分钟之内客户端没有发送心态，则可能客户端断网，关闭连接
 			Object heartbeat = session.getAttribute(IMConstant.HEARTBEAT_KEY);
-			if(heartbeat!=null && System.currentTimeMillis()-Long.valueOf(heartbeat.toString()) >= 300000)
-			{
+			if(heartbeat!=null && System.currentTimeMillis()-Long.valueOf(heartbeat.toString()) >= 300000){
 				session.close(false);
 			}
 		}
@@ -124,7 +115,6 @@ public class MainIOHandler extends IoHandlerAdapter {
 	/**
 	 */
 	public void messageSent(IoSession session, Object message) throws Exception {
-		
 		 //设置心跳时间 
         session.setAttribute(IMConstant.HEARTBEAT_KEY, System.currentTimeMillis());
 	}

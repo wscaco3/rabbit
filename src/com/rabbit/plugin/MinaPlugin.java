@@ -17,6 +17,7 @@ import com.rabbit.im.chat.handler.BindHandler;
 import com.rabbit.im.chat.handler.LogoutHandler;
 import com.rabbit.im.chat.handler.PushOfflineMessageHandler;
 import com.rabbit.im.chat.handler.SessionClosedHandler;
+import com.rabbit.im.nio.constant.IMConstant;
 import com.rabbit.im.nio.filter.ServerMessageCodecFactory;
 import com.rabbit.im.nio.handler.IMRequestHandler;
 import com.rabbit.im.nio.handler.HeartbeatHandler;
@@ -47,11 +48,11 @@ public class MinaPlugin implements IPlugin {
     	//handler
     	MainIOHandler mainIOHandler = new MainIOHandler();
     	HashMap<String, IMRequestHandler> handlers = new HashMap<String, IMRequestHandler>();
-    	handlers.put("client_bind", new BindHandler());
-    	handlers.put("client_logout", new LogoutHandler());
-    	handlers.put("client_heartbeat", new HeartbeatHandler());
+    	handlers.put(IMConstant.RequestKey.CLIENT_BIND, new BindHandler());
+    	handlers.put(IMConstant.RequestKey.CLIENT_LOGOUT, new LogoutHandler());
+    	handlers.put(IMConstant.RequestKey.CLIENT_HEARTBEAT, new HeartbeatHandler());
     	handlers.put("sessionClosedHander", new SessionClosedHandler());
-    	handlers.put("client_get_offline_message", new PushOfflineMessageHandler());
+    	handlers.put(IMConstant.RequestKey.CLIENT_OFFLINE_MESSAGE, new PushOfflineMessageHandler());
     	mainIOHandler.setHandlers(handlers);
     	//filter chain
         DefaultIoFilterChainBuilder chain = acceptor.getFilterChain();        

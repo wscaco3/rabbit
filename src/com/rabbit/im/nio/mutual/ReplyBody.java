@@ -39,8 +39,7 @@ public class ReplyBody implements Serializable {
 	
 	private long timestamp;
 	
-	public ReplyBody()
-	{
+	public ReplyBody(){
 		data = new HashMap<String, String>();
 		timestamp = System.currentTimeMillis();
 	}
@@ -95,9 +94,7 @@ public class ReplyBody implements Serializable {
 	}
 
 	
-	public String toString()
-	{
-		
+	public String toString(){		
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		buffer.append("<reply>");
@@ -105,8 +102,7 @@ public class ReplyBody implements Serializable {
 		buffer.append("<timestamp>").append(timestamp).append("</timestamp>");
 		buffer.append("<code>").append(code).append("</code>");
 		buffer.append("<data>");
-		for(String key:this.getData().keySet())
-		{
+		for(String key:this.getData().keySet()){
 			buffer.append("<"+key+">").append(this.get(key)).append("</"+key+">");
 		}
 		buffer.append("</data>");
@@ -115,9 +111,7 @@ public class ReplyBody implements Serializable {
 	}
 
 	
-	public String toXmlString()
-	{
-		
+	public String toXmlString(){		
 		return toString();
 	}
 }
