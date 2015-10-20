@@ -22,7 +22,7 @@ public class DefaultSessionManager implements SessionManager {
 	private DefaultSessionManager() {
 	}
 
-	public static DefaultSessionManager getInstance() {
+	public static SessionManager getInstance() {
 		DefaultSessionManager retInstance = null;
 		synchronized (DefaultSessionManager.class) {
 			if (defaultInstance == null) {
@@ -84,5 +84,6 @@ public class DefaultSessionManager implements SessionManager {
 
 		return null;
 	}
+
 
 }

@@ -52,17 +52,16 @@ public class Config extends JFinalConfig {
 		// 配置C3p0数据库连接池插件
 		C3p0Plugin c3p0Plugin = new C3p0Plugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password").trim());
 		me.add(c3p0Plugin);
-
 		//任务插件
 		QuartzPlugin quartzPlugin = new QuartzPlugin();
 		me.add(quartzPlugin);
 		//encache缓存插件
-		me.add(new EhCachePlugin()); 
+		me.add(new EhCachePlugin());
+		//redis服务插件 
+		RedisPlugin localRedis = new RedisPlugin("bbs", "localhost",6379); 
+		me.add(localRedis);
 		//mina插件
 		me.add(new MinaPlugin());
-		// 用于缓存bbs模块的redis服务 
-		RedisPlugin localRedis = new RedisPlugin("bbs", "localhost",6379); 
-		me.add(localRedis); 
 		// 配置ActiveRecord插件
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
 		arp.setShowSql(true);//显示sql语句

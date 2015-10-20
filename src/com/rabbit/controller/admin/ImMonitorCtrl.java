@@ -9,14 +9,14 @@ import org.apache.commons.lang.StringUtils;
 import com.rabbit.controller.common.AdminRootCtrl;
 import com.rabbit.im.nio.mutual.Message;
 import com.rabbit.im.nio.session.IMSession;
-import com.rabbit.im.nio.session.DefaultSessionManager;
+import com.rabbit.im.nio.session.SessionManagerFactory;
 import com.rabbit.im.chat.push.DefaultMessagePusher;
 import com.rabbit.im.chat.push.SystemMessagePusher;
 import com.rabbit.im.chat.util.Constants;
 public class ImMonitorCtrl extends AdminRootCtrl {
 	   
 	public void index()	 {  
-		 Collection<IMSession> csc = DefaultSessionManager.getInstance().getSessions();
+		 Collection<IMSession> csc = SessionManagerFactory.getCurrentSessionManager().getSessions();
 		 setAttr("csc",csc);
 		 render("index.html");
 	}

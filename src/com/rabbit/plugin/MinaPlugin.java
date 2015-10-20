@@ -23,6 +23,7 @@ import com.rabbit.im.nio.handler.IMRequestHandler;
 import com.rabbit.im.nio.handler.HeartbeatHandler;
 import com.jfinal.plugin.IPlugin;
 import com.rabbit.im.nio.handler.MainIOHandler;
+import com.rabbit.im.nio.session.SessionManagerFactory;
 import com.rabbit.im.nio.ssl.BogusSslContextFactory;
  
 public class MinaPlugin implements IPlugin {
@@ -33,9 +34,13 @@ public class MinaPlugin implements IPlugin {
     /** Set this to true if you want to make the server SSL */
     private static final boolean USE_SSL = false;
     
-    private NioSocketAcceptor acceptor;
+    private static NioSocketAcceptor acceptor;
  
     public MinaPlugin() {
+    }
+    
+    public static NioSocketAcceptor getAcceptor(){
+    	return acceptor;
     }
     
     public boolean start() {

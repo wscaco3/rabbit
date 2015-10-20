@@ -3,16 +3,11 @@ package com.rabbit.im.chat.push;
 
 import com.rabbit.im.nio.mutual.Message;
 
-
-
-
 /**
  * 
  * @author easy
  */
 public class SystemMessagePusher  extends DefaultMessagePusher{
-
-
  
 	/**
 	 * Constructor.

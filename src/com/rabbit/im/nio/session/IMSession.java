@@ -17,39 +17,35 @@ import com.rabbit.im.nio.constant.IMConstant;
  * @author easy
  */
 
-public class IMSession  implements Serializable{
+public class IMSession implements Serializable {
 
-    /**
+	/**
 	 * 
 	 */
 	private transient static final long serialVersionUID = 1L;
-	public  transient  static String ID = "ID";
-	public  transient static String HOST = "HOST";
-    
+	public transient static String ID = "ID";
+	public transient static String HOST = "HOST";
+
 	private transient IoSession session;
-	
-	private String gid;//session全局ID
-	private Long nid;//session在本台服务器上的ID
-	private String deviceId;//客户端ID  (设备号码+应用包名)
-	private String host;//session绑定的服务器IP
-	private String account;//session绑定的账号
-	private String channel;//终端设备类型
-	private String deviceModel;//终端设备型号
-	private Long bindTime;//登录时间
-	private Long heartbeat;//心跳时间
-	
+
+	private String gid;// session全局ID
+	private Long nid;// session在本台服务器上的ID
+	private String deviceId;// 客户端ID (设备号码+应用包名)
+	private String host;// session绑定的服务器IP
+	private String account;// session绑定的账号
+	private String channel;// 终端设备类型
+	private String deviceModel;// 终端设备型号
+	private Long bindTime;// 登录时间
+	private Long heartbeat;// 心跳时间
+
 	public IMSession(IoSession session) {
 		this.session = session;
 		this.nid = session.getId();
 	}
- 
-	public IMSession()
-	{
-		
+
+	public IMSession() {
+
 	}
-	
-	
- 
 
 	public String getAccount() {
 		return account;
@@ -57,23 +53,18 @@ public class IMSession  implements Serializable{
 
 	public void setAccount(String account) {
 		this.account = account;
-		
+
 		setAttribute(IMConstant.SESSION_KEY, account);
 	}
-
-	 
-	
-	 
-
 
 	public String getGid() {
 		return gid;
 	}
 
 	public void setGid(String gid) {
-		
+
 		this.gid = gid;
-		
+
 		setAttribute("gid", gid);
 	}
 
@@ -89,14 +80,13 @@ public class IMSession  implements Serializable{
 		return deviceId;
 	}
 
-
 	public String getChannel() {
 		return channel;
 	}
 
 	public void setChannel(String channel) {
 		this.channel = channel;
-		
+
 		setAttribute("channel", channel);
 	}
 
@@ -106,24 +96,19 @@ public class IMSession  implements Serializable{
 
 	public void setDeviceModel(String deviceModel) {
 		this.deviceModel = deviceModel;
-		
+
 		setAttribute("deviceModel", deviceModel);
 	}
 
 	public void setDeviceId(String deviceId) {
 		this.deviceId = deviceId;
-		
+
 		setAttribute("deviceId", deviceId);
 	}
-
-
-   
 
 	public String getHost() {
 		return host;
 	}
-
-
 
 	public Long getBindTime() {
 		return bindTime;
@@ -131,7 +116,7 @@ public class IMSession  implements Serializable{
 
 	public void setBindTime(Long bindTime) {
 		this.bindTime = bindTime;
-	    setAttribute("bindTime", bindTime);
+		setAttribute("bindTime", bindTime);
 	}
 
 	public Long getHeartbeat() {
@@ -145,10 +130,9 @@ public class IMSession  implements Serializable{
 
 	public void setHost(String host) {
 		this.host = host;
-		 
+
 		setAttribute("host", host);
 	}
-
 
 	public void setIoSession(IoSession session) {
 		this.session = session;
@@ -157,41 +141,37 @@ public class IMSession  implements Serializable{
 	public IoSession getIoSession() {
 		return session;
 	}
-	
-	
-	
-	public void setAttribute(String key, Object value) {
-		if(session!=null)
-		session.setAttribute(key, value);
-	}
 
+	public void setAttribute(String key, Object value) {
+		if (session != null)
+			session.setAttribute(key, value);
+	}
 
 	public boolean containsAttribute(String key) {
-		if(session!=null)
-		return session.containsAttribute(key);
+		if (session != null)
+			return session.containsAttribute(key);
 		return false;
 	}
-	
+
 	public Object getAttribute(String key) {
-		if(session!=null)
-		return session.getAttribute(key);
+		if (session != null)
+			return session.getAttribute(key);
 		return null;
 	}
 
 	public void removeAttribute(String key) {
-		if(session!=null)
-		session.removeAttribute(key);
+		if (session != null)
+			session.removeAttribute(key);
 	}
 
 	public SocketAddress getRemoteAddress() {
-		if(session!=null)
-		return session.getRemoteAddress();
+		if (session != null)
+			return session.getRemoteAddress();
 		return null;
 	}
 
 	public boolean write(Object msg) {
-		if(session!=null)
-		{
+		if (session != null) {
 			WriteFuture wf = session.write(msg);
 			wf.awaitUninterruptibly(5, TimeUnit.SECONDS);
 			return wf.isWritten();
@@ -200,14 +180,12 @@ public class IMSession  implements Serializable{
 	}
 
 	public boolean isConnected() {
-		if(session!=null)
-		return session.isConnected();
+		if (session != null)
+			return session.isConnected();
 		return false;
 	}
 
-	public boolean  isLocalhost()
-	{
-		
+	public boolean isLocalhost() {
 		try {
 			String ip = InetAddress.getLocalHost().getHostAddress();
 			return ip.equals(host);
@@ -215,29 +193,26 @@ public class IMSession  implements Serializable{
 			e.printStackTrace();
 		}
 		return false;
-		 
-	}
-	
- 
-	public void close(boolean immediately) {
-		if(session!=null)
-		session.close(immediately);
 	}
 
-	 
+	public void close(boolean immediately) {
+		if (session != null)
+			session.close(immediately);
+	}
+
 	public boolean equals(Object o) {
-        
+
 		if (o instanceof IMSession) {
-			
+
 			IMSession t = (IMSession) o;
-			if(t.deviceId!=null && deviceId!=null &&  t.nid!=null && nid!=null)
-			{
-				return t.deviceId.equals(deviceId) && t.nid.longValue()==nid.longValue() && t.host.equals(host);
-			} 
-		}  
+			if (t.deviceId != null && deviceId != null && t.nid != null
+					&& nid != null) {
+				return t.deviceId.equals(deviceId)
+						&& t.nid.longValue() == nid.longValue()
+						&& t.host.equals(host);
+			}
+		}
 		return false;
 	}
-
- 
 
 }

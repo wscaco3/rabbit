@@ -10,7 +10,7 @@ import java.util.Collection;
  *  @author easy
  */
  
-public interface  SessionManager  {
+public interface SessionManager  {
 
 	
 	/**
@@ -55,4 +55,5 @@ public interface  SessionManager  {
 	 * @param session
 	 */
     public String getAccount(IMSession ios);
+    
 }

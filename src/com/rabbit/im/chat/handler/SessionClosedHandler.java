@@ -8,7 +8,8 @@ import com.rabbit.im.nio.handler.IMRequestHandler;
 import com.rabbit.im.nio.mutual.ReplyBody;
 import com.rabbit.im.nio.mutual.SentBody;
 import com.rabbit.im.nio.session.IMSession;
-import com.rabbit.im.nio.session.DefaultSessionManager;
+import com.rabbit.im.nio.session.SessionManager;
+import com.rabbit.im.nio.session.SessionManagerFactory;
 
 /**
  * 断开连接，清除session
@@ -21,13 +22,13 @@ public class SessionClosedHandler implements IMRequestHandler {
 
 	public ReplyBody process(IMSession ios, SentBody message) {
 
-		DefaultSessionManager sessionManager  = DefaultSessionManager.getInstance();
+		SessionManager sessionManager = SessionManagerFactory.getCurrentSessionManager();
 
 		if(ios.getAttribute(IMConstant.SESSION_KEY)==null)		{
 			return null;
 		}		
 	    String account = ios.getAttribute(IMConstant.SESSION_KEY).toString();
-	    sessionManager.removeSession(account);
+	    sessionManager.removeSession(account);	    
 	    
 		return null;
 	}

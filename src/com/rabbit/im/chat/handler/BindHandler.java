@@ -11,7 +11,8 @@ import com.rabbit.im.nio.mutual.Message;
 import com.rabbit.im.nio.mutual.ReplyBody;
 import com.rabbit.im.nio.mutual.SentBody;
 import com.rabbit.im.nio.session.IMSession;
-import com.rabbit.im.nio.session.DefaultSessionManager;
+import com.rabbit.im.nio.session.SessionManager;
+import com.rabbit.im.nio.session.SessionManagerFactory;
  
 
 /**
@@ -25,7 +26,7 @@ public class BindHandler implements IMRequestHandler {
 	public ReplyBody process(IMSession newSession, SentBody message) {
 		
 		ReplyBody reply = new ReplyBody();
-		DefaultSessionManager sessionManager = DefaultSessionManager.getInstance();
+		SessionManager sessionManager = SessionManagerFactory.getCurrentSessionManager();
 		try { 
 			
 			String account = message.get("account");
@@ -44,7 +45,7 @@ public class BindHandler implements IMRequestHandler {
 			 */
 			IMSession oldSession  = sessionManager.getSession(account);
             //如果是账号已经在另一台终端登录。则让另一个终端下线
-			if(oldSession!=null&&!oldSession.equals(newSession)){					 
+			if(oldSession!=null&&!oldSession.equals(newSession)){
 					oldSession.removeAttribute(IMConstant.SESSION_KEY);
 					Message msg = new Message();
 					msg.setType(IMConstant.MessageType.TYPE_999);//强行下线消息类型
@@ -60,7 +61,7 @@ public class BindHandler implements IMRequestHandler {
 						oldSession.close(true);
 						oldSession = null;
 					}
-					oldSession = null;				
+					oldSession = null;
 			}
 			if(oldSession==null){
 				sessionManager.addSession(account, newSession);				 

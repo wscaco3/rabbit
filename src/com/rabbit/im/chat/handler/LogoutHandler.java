@@ -6,7 +6,8 @@ import com.rabbit.im.nio.handler.IMRequestHandler;
 import com.rabbit.im.nio.mutual.ReplyBody;
 import com.rabbit.im.nio.mutual.SentBody;
 import com.rabbit.im.nio.session.IMSession;
-import com.rabbit.im.nio.session.DefaultSessionManager;
+import com.rabbit.im.nio.session.SessionManager;
+import com.rabbit.im.nio.session.SessionManagerFactory;
  
 
 /**
@@ -17,8 +18,7 @@ import com.rabbit.im.nio.session.DefaultSessionManager;
 public class LogoutHandler implements IMRequestHandler {
 
 	public ReplyBody process(IMSession ios, SentBody message) {
-		
-		DefaultSessionManager sessionManager  =  DefaultSessionManager.getInstance();
+		SessionManager sessionManager = SessionManagerFactory.getCurrentSessionManager();
 		
 		String account =ios.getAttribute(IMConstant.SESSION_KEY).toString();
 		ios.removeAttribute(IMConstant.SESSION_KEY);

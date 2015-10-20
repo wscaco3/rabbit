@@ -74,6 +74,11 @@ public class ClusterSessionManager implements SessionManager{
        return 	ios.getAccount();
     }
 
+
+	public void releaseSessions() {
+		
+	}
+
  
  
 }
