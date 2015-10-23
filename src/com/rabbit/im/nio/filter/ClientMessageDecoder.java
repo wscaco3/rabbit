@@ -12,6 +12,7 @@ import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 import com.rabbit.im.nio.constant.IMConstant;
 import com.rabbit.im.nio.mutual.Message;
 import com.rabbit.im.nio.mutual.ReplyBody;

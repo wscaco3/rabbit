@@ -13,17 +13,16 @@ import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.filter.ssl.SslFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
+import com.jfinal.plugin.IPlugin;
 import com.rabbit.im.chat.handler.BindHandler;
 import com.rabbit.im.chat.handler.LogoutHandler;
 import com.rabbit.im.chat.handler.PushOfflineMessageHandler;
 import com.rabbit.im.chat.handler.SessionClosedHandler;
 import com.rabbit.im.nio.constant.IMConstant;
 import com.rabbit.im.nio.filter.ServerMessageCodecFactory;
-import com.rabbit.im.nio.handler.IMRequestHandler;
 import com.rabbit.im.nio.handler.HeartbeatHandler;
-import com.jfinal.plugin.IPlugin;
+import com.rabbit.im.nio.handler.IMRequestHandler;
 import com.rabbit.im.nio.handler.MainIOHandler;
-import com.rabbit.im.nio.session.SessionManagerFactory;
 import com.rabbit.im.nio.ssl.BogusSslContextFactory;
  
 public class MinaPlugin implements IPlugin {
