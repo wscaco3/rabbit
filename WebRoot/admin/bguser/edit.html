@@ -36,7 +36,19 @@ $(function(){
   <div class="form-group">
     <label for="username" class="col-sm-2 control-label">用户名</label>
     <div class="col-xs-10 col-sm-5">
-      <input type="text" id="username" name="admin.username" value="${(admin.username)!}" datatype="*1-200,e" class="form-control">
+      <input type="text" id="username" name="admin.username" value="${(admin.username)!}" datatype="s4-40" class="form-control">
+    </div>
+  </div>  
+  <div class="form-group">
+    <label for="nickname" class="col-sm-2 control-label">昵称</label>
+    <div class="col-xs-10 col-sm-5">
+      <input type="text" id="nickname" name="admin.nickname" value="${(admin.nickname)!}" datatype="s2-40" class="form-control">
+    </div>
+  </div>  
+  <div class="form-group">
+    <label for="email" class="col-sm-2 control-label">邮箱</label>
+    <div class="col-xs-10 col-sm-5">
+      <input type="text" id="email" name="admin.email" value="${(admin.email)!}" datatype="*1-120,e" class="form-control">
     </div>
   </div>
   <div class="form-group">

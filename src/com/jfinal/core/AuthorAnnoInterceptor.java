@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Config;
-import com.jfinal.ext.authorize.AuthModel;
 import com.jfinal.kit.StrKit;
+import com.rabbit.jfinal.ext.authorize.AuthModel;
 import com.rabbit.model.Admin;
 
 public class AuthorAnnoInterceptor implements Interceptor {

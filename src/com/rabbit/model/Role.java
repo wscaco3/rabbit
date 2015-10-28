@@ -18,6 +18,10 @@ mysql> desc bg_role;
 
  */
 public class Role extends Model<Role> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1516960440446130729L;
 	public static final Role dao = new Role();
 	
 

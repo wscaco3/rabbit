@@ -11,6 +11,10 @@ public class AdminRoutes extends Routes {
 		add("/admin/bguser", BguserCtrl.class);
 		add("/admin/webchat", WebChatCtrl.class);
 		add("/admin/immonitor", ImMonitorCtrl.class);
+		/*add("/snaker/process", ProcessController.class);
+		add("/snaker/surrogate", SurrogateController.class);
+		add("/snaker/task", TaskController.class);
+		add("/snaker/flow", FlowController.class);*/
 	}
 
 }

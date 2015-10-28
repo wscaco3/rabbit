@@ -19,10 +19,14 @@ mysql> desc bg_admin;
 
  */
 public class Admin extends Model<Admin> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1939726258619543345L;
 	public static final Admin dao = new Admin();
 	
 	public Admin findByUserPass(String username,String password){
-		return findFirst("select * from bg_admin where username = ? and password = ?", username, password);
+		return findFirst("select t.*,r.rname from bg_admin t left join bg_role r on r.id = t.rid where (t.username = ? or t.email = ?) and t.password = ?", username, username,password);
 	}
 	
 	public Page<Admin> paginate(int pageNumber, int pageSize, String filter) {

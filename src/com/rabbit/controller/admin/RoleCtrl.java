@@ -9,9 +9,9 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 import com.jfinal.core.AuthorAnnoInterceptor;
-import com.jfinal.ext.authorize.Authorize;
 import com.jfinal.kit.StrKit;
 import com.rabbit.controller.common.AdminRootCtrl;
+import com.rabbit.jfinal.ext.authorize.Authorize;
 import com.rabbit.model.Role;
 @Authorize(name = "1", value = "权限管理")
 public class RoleCtrl extends AdminRootCtrl {	

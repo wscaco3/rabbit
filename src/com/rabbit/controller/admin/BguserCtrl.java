@@ -3,9 +3,9 @@ package com.rabbit.controller.admin;
 import com.rabbit.model.Admin;
 import com.rabbit.model.Role;
 import com.rabbit.util.SecurityUtil;
-import com.jfinal.ext.authorize.Authorize;
 import com.jfinal.kit.StrKit;
 import com.rabbit.controller.common.AdminRootCtrl;
+import com.rabbit.jfinal.ext.authorize.Authorize;
 @Authorize(name = "2", value = "用户管理")
 public class BguserCtrl extends AdminRootCtrl {	
 

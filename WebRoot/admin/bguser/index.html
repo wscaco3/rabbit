@@ -12,7 +12,7 @@ $(function(){
 		if(data.list == undefined) return false;
 		$("#showlist").empty();
 		$.each(data.list, function (i, row) {
-			var str = '<tr id="tr_'+row.id+'"><td>'+row.username+'</td><td>'+row.rname+'</td><td>'+row.mobile+'</td><td>'+row.remark+'</td><td>'
+			var str = '<tr id="tr_'+row.id+'"><td>'+row.username+'</td><td class="hidden-xs">'+row.nickname+'</td><td>'+row.rname+'</td><td>'+row.mobile+'</td><td class="hidden-xs">'+row.email+'</td><td>'+row.remark+'</td><td>'
 			<#if session.usermodels?index_of(",2_2,")&gt;-1 > 
 			+'<a class="btn btn-primary btn-xs" href="/admin/bguser/edit/'+row.id+'">修改</a>'
 			</#if>
@@ -39,8 +39,10 @@ $(function(){
 <div class="well filter">
 	<div class="form-inline">
 		<div class="form-group">
-			<label for="username">用户名</label> 
+			<label for="username">用户帐号</label> 
 			<input type="text" class="form-control" id="username" data-rule="like">
+			<label for="nickname">昵称</label> 
+			<input type="text" class="form-control" id="nickname" data-rule="like">
 			<label for="rname">角色名</label> 
 			<input type="text" class="form-control" id="rname" data-rule="like">
 		</div>
@@ -53,9 +55,11 @@ $(function(){
 <table class="table table-bordered table-hover table-striped">
 	<thead>
 		<tr>
-			<th width="120px">用户帐号</th>
+			<th width="60px">用户帐号</th>
+			<th width="60px" class="hidden-xs">昵称</th>
 			<th width="60px">角色</th>
 			<th width="60px">手机号</th>
+			<th width="120px" class="hidden-xs">邮箱</th>
 			<th width="120px" class="hidden-xs">备注</th>
 			<th width="60px">操作</th>
 		</tr>
