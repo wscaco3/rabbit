@@ -16,7 +16,6 @@ import com.rabbit.controller.IndexCtrl;
 import com.rabbit.controller.common.UploadFileCtrl;
 import com.rabbit.jfinal.upload.RenamePolicyCos;
 import com.rabbit.model.*;
-import com.rabbit.plugin.MinaPlugin;
 import com.rabbit.plugin.QuartzPlugin;
 
 /**
@@ -62,7 +61,7 @@ public class AppConfig extends JFinalConfig {
 		me.add(localRedis);
 
 		//mina插件
-		me.add(new MinaPlugin());
+		//me.add(new MinaPlugin());
 		// 配置ActiveRecord插件
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
 		arp.setShowSql(true);//显示sql语句
