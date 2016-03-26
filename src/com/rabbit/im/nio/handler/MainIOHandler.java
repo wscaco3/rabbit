@@ -3,11 +3,11 @@ package com.rabbit.im.nio.handler;
 
 import java.util.HashMap;
 
-import org.apache.log4j.Logger;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 
+import com.jfinal.log.Log;
 import com.rabbit.im.nio.constant.IMConstant;
 import com.rabbit.im.nio.mutual.ReplyBody;
 import com.rabbit.im.nio.mutual.SentBody;
@@ -20,7 +20,7 @@ import com.rabbit.im.nio.session.IMSession;
  */
 public class MainIOHandler extends IoHandlerAdapter {
 
-	protected final Logger logger = Logger.getLogger(MainIOHandler.class);
+    private final Log logger = Log.getLog(getClass());
 
 	private HashMap<String, IMRequestHandler> handlers = new HashMap<String, IMRequestHandler>();
 
@@ -108,7 +108,7 @@ public class MainIOHandler extends IoHandlerAdapter {
 	public void exceptionCaught(IoSession session, Throwable cause)
 			throws Exception {
 		logger.error("exceptionCaught()... from "+session.getRemoteAddress());
-		logger.error(cause);
+		logger.error(cause.getMessage());
 		cause.printStackTrace();
 	}
 

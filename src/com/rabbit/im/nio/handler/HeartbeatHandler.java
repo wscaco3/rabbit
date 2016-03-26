@@ -1,8 +1,7 @@
  
 package com.rabbit.im.nio.handler;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.rabbit.im.nio.constant.IMConstant;
 import com.rabbit.im.nio.mutual.ReplyBody;
 import com.rabbit.im.nio.mutual.SentBody;
@@ -15,11 +14,11 @@ import com.rabbit.im.nio.session.IMSession;
  */
 public class HeartbeatHandler implements IMRequestHandler {
 
-	protected final Logger logger = Logger.getLogger(HeartbeatHandler.class);
+    private final Log log = Log.getLog(getClass());
 
 	public ReplyBody process(IMSession session, SentBody message) {
 
-		logger.debug("heartbeat... from "+session.getRemoteAddress().toString());
+		log.debug("heartbeat... from "+session.getRemoteAddress().toString());
 		ReplyBody reply = new ReplyBody();
 		reply.setKey(IMConstant.RequestKey.CLIENT_HEARTBEAT);
 		reply.setCode(IMConstant.ReturnCode.CODE_200);

@@ -16,12 +16,12 @@ import org.quartz.SchedulerFactory;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
  
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.IPlugin;
  
 public class QuartzPlugin implements IPlugin {
  
-    private final Logger logger = Logger.getLogger(getClass());
+    private final Log logger = Log.getLog(getClass());
      
     private static final String JOB = "job";
  

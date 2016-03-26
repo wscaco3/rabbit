@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.jfinal.config.Constants;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.handler.Handler;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 
 /**
  * JFinal framework filter
@@ -40,7 +40,7 @@ public final class JFinalFilter implements Filter {
 	private JFinalConfig jfinalConfig;
 	private Constants constants;
 	private static final JFinal jfinal = JFinal.me();
-	private static Logger log;
+	private static Log log;
 	private int contextPathLength;
 	//add for jfinal exclude by wangchao
 	private String[] excludedArray;
@@ -122,6 +122,6 @@ public final class JFinalFilter implements Filter {
 	}
 	
 	static void initLogger() {
-		log = Logger.getLogger(JFinalFilter.class);
+		log = Log.getLog(JFinalFilter.class);
 	}
 }

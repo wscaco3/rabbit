@@ -3,8 +3,7 @@ package com.rabbit.im.chat.handler;
 import java.net.InetAddress;
 import java.util.UUID;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.rabbit.im.nio.constant.IMConstant;
 import com.rabbit.im.nio.handler.IMRequestHandler;
 import com.rabbit.im.nio.mutual.Message;
@@ -22,7 +21,7 @@ import com.rabbit.im.nio.session.SessionManagerFactory;
  */ 
 public class BindHandler implements IMRequestHandler {
 
-	protected final Logger logger = Logger.getLogger(BindHandler.class);
+    private final Log log = Log.getLog(getClass());
 	public ReplyBody process(IMSession newSession, SentBody message) {
 		
 		ReplyBody reply = new ReplyBody();
@@ -71,7 +70,7 @@ public class BindHandler implements IMRequestHandler {
 			reply.setCode(IMConstant.ReturnCode.CODE_500);
 			e.printStackTrace();
 		}
-		logger.debug("bind :account:" +message.get("account")+"-----------------------------" +reply.getCode());
+		log.debug("bind :account:" +message.get("account")+"-----------------------------" +reply.getCode());
 		return reply;
 	}
 	

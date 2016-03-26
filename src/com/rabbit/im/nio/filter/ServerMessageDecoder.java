@@ -6,7 +6,6 @@ import java.nio.charset.Charset;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.log4j.Logger;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.CumulativeProtocolDecoder;
@@ -15,6 +14,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.jfinal.log.Log;
 import com.rabbit.im.nio.constant.IMConstant;
 import com.rabbit.im.nio.mutual.SentBody;
 /**
@@ -23,8 +23,8 @@ import com.rabbit.im.nio.mutual.SentBody;
  *
  */
 public class ServerMessageDecoder extends CumulativeProtocolDecoder {
-	
-	protected final Logger logger = Logger.getLogger(ServerMessageDecoder.class);
+
+    private final Log log = Log.getLog(getClass());
 	private final Charset charset = Charset.forName("UTF-8");
     private IoBuffer buff = IoBuffer.allocate(320).setAutoExpand(true);
 	@Override
@@ -53,7 +53,7 @@ public class ServerMessageDecoder extends CumulativeProtocolDecoder {
 	        buff.get(bytes);
 	        
 	        String message = new String(bytes, charset);
-	        logger.debug("ServerMessageDecoder:" + message);
+	        log.debug("ServerMessageDecoder:" + message);
 	        buff.clear();
 	        try{	        	 
 				SentBody body = new SentBody();
@@ -73,7 +73,7 @@ public class ServerMessageDecoder extends CumulativeProtocolDecoder {
 		        
 		        out.write(body);
 	        }catch(Exception e){
-	        	logger.warn(e.getMessage());
+	        	log.warn(e.getMessage());
 	        	out.write(message);
 	        }
 		}

@@ -9,7 +9,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import org.apache.log4j.Logger;
+import com.jfinal.log.Log;
 
 public class FileUtil {
 	/**
@@ -18,7 +18,7 @@ public class FileUtil {
 	 * @param path
 	 *            目录
 	 */
-	private static Logger logger = Logger.getLogger(FileUtil.class.getName());
+	private static Log logger = Log.getLog(FileUtil.class.getName());
 	public static void createDir(String path) {
 		File dir = new File(path);
 		if (!dir.exists()) {

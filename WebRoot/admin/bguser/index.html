@@ -12,7 +12,7 @@ $(function(){
 		if(data.list == undefined) return false;
 		$("#showlist").empty();
 		$.each(data.list, function (i, row) {
-			var str = '<tr id="tr_'+row.id+'"><td>'+row.username+'</td><td class="hidden-xs">'+row.nickname+'</td><td>'+row.rname+'</td><td>'+row.mobile+'</td><td class="hidden-xs">'+row.email+'</td><td>'+row.remark+'</td><td>'
+			var str = '<tr id="tr_'+row.id+'"><td>'+row.username+'</td><td class="hidden-xs">'+row.nickname+'</td><td>'+row.rname+'</td><td>'+row.mobile+'</td><td class="hidden-xs">'+row.email+'</td><td class="hidden-xs">'+row.remark+'</td><td>'
 			<#if session.usermodels?index_of(",2_2,")&gt;-1 > 
 			+'<a class="btn btn-primary btn-xs" href="/admin/bguser/edit/'+row.id+'">修改</a>'
 			</#if>

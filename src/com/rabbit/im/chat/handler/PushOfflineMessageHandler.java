@@ -9,8 +9,7 @@ package com.rabbit.im.chat.handler;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.rabbit.im.nio.constant.IMConstant;
 import com.rabbit.im.nio.handler.IMRequestHandler;
 import com.rabbit.im.nio.mutual.Message;
@@ -22,8 +21,7 @@ import com.rabbit.im.nio.session.IMSession;
  */
 public class PushOfflineMessageHandler implements IMRequestHandler {
 
-	protected final Logger logger = Logger
-			.getLogger(PushOfflineMessageHandler.class);
+    private final Log log = Log.getLog(getClass());
 
 	public ReplyBody process(IMSession ios, SentBody message) {
 
@@ -41,7 +39,7 @@ public class PushOfflineMessageHandler implements IMRequestHandler {
 		} catch (Exception e) {
 			reply.setCode(IMConstant.ReturnCode.CODE_500);
 			e.printStackTrace();
-			logger.error("拉取离线消息失败", e);
+			log.error("拉取离线消息失败", e);
 		}
 		return reply;
 	}

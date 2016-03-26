@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.HashMap;
 
-import org.apache.log4j.Logger;
 import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
@@ -13,6 +12,7 @@ import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.filter.ssl.SslFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
+import com.jfinal.log.Log;
 import com.jfinal.plugin.IPlugin;
 import com.rabbit.im.chat.handler.BindHandler;
 import com.rabbit.im.chat.handler.LogoutHandler;
@@ -26,8 +26,8 @@ import com.rabbit.im.nio.handler.MainIOHandler;
 import com.rabbit.im.nio.ssl.BogusSslContextFactory;
  
 public class MinaPlugin implements IPlugin {
- 
-    private final Logger log = Logger.getLogger(getClass());
+
+    private final Log log = Log.getLog(getClass());
     /** Choose your favorite port number. */
     private static final int PORT = 23456;
     /** Set this to true if you want to make the server SSL */

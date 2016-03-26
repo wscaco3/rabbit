@@ -1,11 +1,11 @@
 package com.rabbit.job;
-import org.apache.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-public class MinJob implements Job {
-	private static Logger log = Logger.getLogger(MinJob.class.getName());
 
+import com.jfinal.log.Log;
+public class MinJob implements Job {
+    private final Log log = Log.getLog(getClass());
     @Override
     public void execute(JobExecutionContext arg0) throws JobExecutionException {
     	log.error("ok");

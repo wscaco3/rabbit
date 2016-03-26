@@ -120,7 +120,7 @@ public class PoiKit {
     private static void processAsModel(String[] columns, HSSFRow row, Object obj) {
         HSSFCell cell;
         Model<?> model = (Model<?>) obj;
-        Set<Entry<String, Object>> entries = model.getAttrsEntrySet();
+        Set<Entry<String, Object>> entries = model._getAttrsEntrySet();
         if (columns.length == 0) {// 未设置显示列，默认全部
             int columnIndex = 0;
             for (Entry<String, Object> entry : entries) {

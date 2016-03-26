@@ -20,13 +20,13 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 import com.jfinal.render.Render;
 import com.jfinal.render.RenderException;
 
 public class PoiRender extends Render {
 
-    protected final Logger LOG = Logger.getLogger(getClass());
+    protected final Log log = Log.getLog(getClass());
     private final static String CONTENT_TYPE = "application/msexcel;charset=" + getEncoding();
     private List<?> data;
     private String[] headers;
@@ -69,7 +69,7 @@ public class PoiRender extends Render {
                     os.close();
                 }
             } catch (IOException e) {
-                LOG.error(e.getMessage(), e);
+                log.error(e.getMessage(), e);
             }
 
         }

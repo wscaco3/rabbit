@@ -1,8 +1,7 @@
  
 package com.rabbit.im.chat.handler;
 
-import org.apache.log4j.Logger;
-
+import com.jfinal.log.Log;
 import com.rabbit.im.nio.constant.IMConstant;
 import com.rabbit.im.nio.handler.IMRequestHandler;
 import com.rabbit.im.nio.mutual.ReplyBody;
@@ -18,7 +17,7 @@ import com.rabbit.im.nio.session.SessionManagerFactory;
  */
 public class SessionClosedHandler implements IMRequestHandler {
 
-	protected final Logger logger = Logger.getLogger(SessionClosedHandler.class);
+    private final Log log = Log.getLog(getClass());
 
 	public ReplyBody process(IMSession ios, SentBody message) {
 
